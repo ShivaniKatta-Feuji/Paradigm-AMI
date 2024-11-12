@@ -13,12 +13,26 @@ test.describe("Paradigm Test Cases", async () => {
         await quoteFunctionality.searchByNumber()
     })
 
+    test("search by invalid number",async({page})=>{
+        await quoteFunctionality.searchByInvalidNumber()
+    })
+
     test("search by name",async({page})=>{
         await quoteFunctionality.searchByName()
     })
 
+    test("search by invalid name",async({page})=>{
+        await quoteFunctionality.searchByInvalidName()
+        await page.waitForTimeout(3000)
+    })
+
     test("search by client",async({page})=>{
         await quoteFunctionality.searchByClient()
+    })
+
+    test("search by invalid client",async({page})=>{
+        await quoteFunctionality.searchByInvalidClient()
+        await page.waitForTimeout(3000)
     })
 
     test("search by PONumber",async({page})=>{
@@ -26,7 +40,12 @@ test.describe("Paradigm Test Cases", async () => {
         await page.waitForTimeout(3000)
     })
 
-    test.only("checking pagination",async({page})=>{
+    test("search by invalid PONumber",async({page})=>{
+        await quoteFunctionality.searchByInvalidPONumber()
+        await page.waitForTimeout(3000)
+    })
+
+    test("checking pagination",async({page})=>{
         await quoteFunctionality.pagination()
         await page.waitForTimeout(3000)
     })

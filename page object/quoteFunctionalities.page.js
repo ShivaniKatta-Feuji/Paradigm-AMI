@@ -54,7 +54,7 @@ exports.QuoteFunctionality=class QuoteFunctionality{
     }
     async searchByInvalidName(){
         await this.select.selectOption({value:'QuoteName'})
-        await this.search.fill(data.name)
+        await this.search.fill(data.invalidName)
         expect(this.nodata).toHaveText("No data found")
     }
     async searchByClient(){
@@ -63,7 +63,7 @@ exports.QuoteFunctionality=class QuoteFunctionality{
     }
     async searchByInvalidClient(){
         await this.select.selectOption({value:'ClientName'})
-        await this.search.fill(data.client)
+        await this.search.fill(data.invalidClient)
         expect(this.nodata).toHaveText("No data found")
     }
     async searchByPONumber(){
@@ -71,7 +71,7 @@ exports.QuoteFunctionality=class QuoteFunctionality{
         await this.search.fill(data.PONumber)
     }
     async searchByInvalidPONumber(){
-        await this.select.selectOption({value:'PONumber'})
+        await this.select.selectOption({value:'PONumber'}) 
         await this.search.fill(data.invalidPONumber)
         expect(this.nodata).toHaveText("No data found")
     }
