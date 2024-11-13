@@ -1,0 +1,24 @@
+{
+    "myQuotes" : {
+        "currentPage" : "My Quotes"
+    },
+    "newQuoteForm" :
+    {
+        "quoteName" : "Quote Name",
+        "newQuotePage" : "New Quote"
+    },
+    "createQuote" : 
+    {
+        "quoteName" : "Test Quote122",
+        "projectName" : "Test6665",
+        "client" :"WINDOW NATION/ISS-162-887030",
+        "selectedClient" : "WINDOW NATION/ISS-162-887030 (887030)",
+        "currentPage" : "New Quote"
+    },
+    "css" : 
+    {
+        "color" : "color",
+        "disableStateColor" : "rgb(0, 0, 0)",
+        "enabledStatecolor" : "rgb(255, 255, 255)"
+    }
+}
