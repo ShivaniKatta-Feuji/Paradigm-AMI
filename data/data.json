@@ -7,5 +7,15 @@
     "invalidClient":"UnknownClient",
     "PONumber":"123400",
     "invalidPONumber":"PO99999",
-    "smalltimeout":3000
+    "selectNumberOption":"QuoteNumber",
+    "noDataText":"No data found",
+    "selectNameOption":"QuoteName",
+    "selectClientOption":"ClientName",
+    "selectPONumberOption":"PONumber",
+    "paginationValue":"25",
+    "newQuoteURL":"https://am-webcp-test.myparadigmcloud.com/quotes/create",
+    "deleteSnackbar":"Quote deleted✕",
+    "namePosition":4,
+    "clientPosition":5,
+    "PONumberPosition":7
 }
