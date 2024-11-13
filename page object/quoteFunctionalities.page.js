@@ -1,18 +1,24 @@
 const {expect}=require('@playwright/test')
-const data=require('../data.json')
+const data=require('../data/data.json')
+const helper=require("../utils/helper")
 
 
 exports.QuoteFunctionality=class QuoteFunctionality{
     constructor(page){
         this.page=page
         this.myquote=page.locator("//li[@class='nav-item ms-1 quotes active']")
-        this.select=page.locator('#select-addon')
+        this.select=page.locator("#select-addon")
         this.search=page.locator("//input[@class='form-control w-auto']")
         this.show=page.locator("#perPage")
         this.newquote=page.locator("//a[@class='btn btn-success']")
         this.nodata=page.locator(".not-found")
         this.deleteBtn=page.locator("(//button[@title='Delete'])[1]")
-        this.show=this.page.locator("#perPage")
+        this.show=page.locator("#perPage")
+        this.snackbar=page.locator(".top-right")
+        this.row=page.locator(".quote-row")
+        this.checkNumberColumn=page.locator("(//tr[@class='quote-row']//a)[2]")
+        this.row=page.locator("//tr[@class='quote-row']")
+        this.checkClientColumn=page.locator("(//tr[@class='quote-row']//td)[5]")
 
         this.username=page.locator("//input[@id='username']");
         this.password=page.locator("//input[@id='password']");
@@ -30,18 +36,12 @@ exports.QuoteFunctionality=class QuoteFunctionality{
         await this.nextButton.click();
         await this.password.fill("@miAt0Te$t3049");
         await this.signInButton.click();
-        // await this.myquote.click()
         await this.myQuotes.click();
     }
     async searchByNumber(){
-        
- 
-        
-        // await expect(this.currentPage).toHaveText(data.myQuotes.currentPage);
-        // await this.newQuote.click();
-
         await this.select.selectOption({value:'QuoteNumber'})
         await this.search.fill(data.number)
+        await expect(this.checkNumberColumn).toHaveText(data.number)
     }
     async searchByInvalidNumber(){
         await this.select.selectOption({value:'QuoteNumber'})
@@ -51,6 +51,12 @@ exports.QuoteFunctionality=class QuoteFunctionality{
     async searchByName(){
         await this.select.selectOption({value:'QuoteName'})
         await this.search.fill(data.name)
+        await this.page.waitForTimeout(data.smalltimeout)
+        const recordsCount=await this.row.count()
+        for (let index = 0; index < recordsCount; index++) {
+            const nameColumn=await this.row.nth(index).locator('td:nth-child(4)').textContent()
+            expect(nameColumn.trim()).toBe(data.name);
+        }
     }
     async searchByInvalidName(){
         await this.select.selectOption({value:'QuoteName'})
@@ -60,6 +66,13 @@ exports.QuoteFunctionality=class QuoteFunctionality{
     async searchByClient(){
         await this.select.selectOption({value:'ClientName'})
         await this.search.fill(data.client)
+        await this.page.waitForTimeout(data.smalltimeout)
+        const recordsCount=await this.row.count()
+        for (let index = 0; index < recordsCount; index++) {
+            const clientColumn=await this.row.nth(index).locator('td:nth-child(5)').textContent()
+            expect(clientColumn.trim()).toBe(data.client);
+        }
+        
     }
     async searchByInvalidClient(){
         await this.select.selectOption({value:'ClientName'})
@@ -69,6 +82,12 @@ exports.QuoteFunctionality=class QuoteFunctionality{
     async searchByPONumber(){
         await this.select.selectOption({value:'PONumber'})
         await this.search.fill(data.PONumber)
+        await this.page.waitForTimeout(data.smalltimeout)
+        const recordsCount=await this.row.count()
+        for (let index = 0; index < recordsCount; index++) {
+            const poNumber=await this.row.nth(index).locator('td:nth-child(7)').textContent()
+            expect(poNumber.trim()).toBe(data.PONumber);
+        }
     }
     async searchByInvalidPONumber(){
         await this.select.selectOption({value:'PONumber'}) 
@@ -84,8 +103,9 @@ exports.QuoteFunctionality=class QuoteFunctionality{
     }
     async delete(){
         await this.deleteBtn.click()
-        await this.page.on('dialog',async(dialog)=>{
-            await dialog.accept()
-        })
+        helper.alertHandling(this.page)
+        await this.page.waitForTimeout(data.smalltimeout)
+        expect(this.snackbar).toBeVisible()
+        expect(this.snackbar).toHaveText("Quote deleted✕")
     }
 }
