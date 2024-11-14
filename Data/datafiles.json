@@ -1,0 +1,19 @@
+{
+    "clientName":"WINDOW NATION/ISS-162-887030",
+    "description":"sampleDescription",
+    "dealerPrice":"1000000",
+    "quantity": "1",
+    "errorText":"User initials are required for this quote. Please complete the Supply Center Information form.",
+    "givenByText":"txt",
+    "AuthorizationText":"txt",
+    "userInitials":"txt",
+    "jobCost":"I8167",
+    "measureBy":"txt",
+    "cashDeposit":"2",
+    "additionalAmout":"4",
+    "checkDeposit":"1",
+    "internalPO":"3",
+    "phone":"5"
+}
+
+ 
