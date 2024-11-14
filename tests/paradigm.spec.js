@@ -4,7 +4,7 @@ const indexPage = require('../utils/index.page')
 test.describe("Paradigm Test Cases", async () => {
 
     let quoteCreation;
-    test.beforeEach("Launch URL", async ({ page }) => {
+    test.beforeEach("Navigate to New Quote", async ({ page }) => {
         quoteCreation = new indexPage.QuoteCreation(page);
         await quoteCreation.login();
     })

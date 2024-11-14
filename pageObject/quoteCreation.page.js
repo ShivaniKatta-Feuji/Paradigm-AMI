@@ -22,7 +22,6 @@ exports.QuoteCreation = class QuoteCreation {
         this.quoteNameInput = page.locator("//input[@name='QuoteName']");
         this.projectNameLabel = page.locator("//label[text()='Project Name']");
         this.projectNameInput = page.locator("//input[@id='react-select-2-input']");
-        // this.selectCreateProject=page
 
         this.selectClientButton = page.locator("//span[text()='Select a client']//parent::button");
         this.searchClientBar = page.locator("//input[@placeholder='Search by client name or number']");
@@ -36,13 +35,13 @@ exports.QuoteCreation = class QuoteCreation {
 
         this.quoteNameHeader = page.locator("//a[@id='quote-name-edit']");
         this.quoteProjectHeader = page.locator("//a[@id='project-name-edit']");
-
     }
 
     async navigate() {
         await this.newQuote.click();
         await expect(this.quoteCurrentPage).toHaveText(data.newQuoteForm.currentPage);
     }
+
     async login() {
         await this.page.goto(process.env.base_url);
 
@@ -53,8 +52,8 @@ exports.QuoteCreation = class QuoteCreation {
 
         await this.newQuote.click();
         await expect(this.quoteCurrentPage).toHaveText(data.newQuoteForm.newQuotePage);
-
     }
+    
     async clickNewQuote() {
         await expect(this.formHeader).toHaveText(data.newQuoteForm.newQuotePage);
         await expect(this.quoteCurrentPage).toHaveText(data.newQuoteForm.newQuotePage);
@@ -71,18 +70,12 @@ exports.QuoteCreation = class QuoteCreation {
 
     async validQuoteName() {
         await this.quoteNameInput.fill(data.createQuote.quoteName);
-        // await expect(this.createButton).toBeDisabled();
-        // await this.page.waitForTimeout(3000);
-
-
     }
 
     async selectProjectName() {
         await this.projectNameInput.fill(data.createQuote.projectName);
         await this.page.getByText(`Create "${data.createQuote.projectName}"`, { exact: true }).click();
         await expect(this.createButton).toBeDisabled();
-        // await this.page.waitForTimeout(3000);
-
     }
 
     async selectClientDropdown() {
@@ -100,10 +93,7 @@ exports.QuoteCreation = class QuoteCreation {
         // await this.selectClientDropdown();
         await this.createButton.click();
         await expect(this.notification).toBeVisible();
-        const createdQuoteName= await this.notification.textContent();
-        console.log(createdQuoteName);
 
-        // await expect(this.quoteCurrentPage).toHaveText(data.createQuote.currentPage);
         await expect(this.quoteNameHeader).toContainText(data.createQuote.quoteName);
         await expect(this.quoteProjectHeader).toContainText(data.createQuote.projectName);
         await expect(this.quoteNameHeader).toBeEditable();
