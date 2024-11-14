@@ -1,0 +1,55 @@
+{
+    "url" : 
+    {
+        "baseUrl" : " https://am-webcp-test.myparadigmcloud.com/"
+    },
+
+    "invalidCredentials" : 
+    {
+
+        "invalidEmail" : "invalid@gmail.com",
+        "invalidPassword" : "invalidPassword123"
+       
+    },
+
+    "errorMessage" : 
+    {
+        "expectedMessage" : "The login credentials are incorrect.",
+        "passwordErrorMessage":"The login credentials are incorrect.",
+        "emailErrorMessage": "No email found. You can try another email or Register"
+
+    },
+
+
+    "validUser": 
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "johndoe@example.com",
+      "password": "Password123",
+      "confirmPassword": "Password123",
+      "privacyPolicyAccepted": true
+    },
+    "invalidUser": 
+    {
+      "firstName": "",
+      "lastName": "Doe",
+      "email": "invalidemail",
+      "password": "123",
+      "confirmPassword": "123",
+      "privacyPolicyAccepted": false
+    },
+
+    "emptyConfirmPassword": 
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "johndoe@example.com",
+      "password": "Password123",
+      "confirmPassword": "",
+      "privacyPolicyAccepted": true
+    }
+  }
+  
+
+
