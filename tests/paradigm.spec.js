@@ -9,7 +9,7 @@ test.describe("Paradigm Test Cases", async () => {
         quoteFunctionality = new indexPage.QuoteFunctionality(page)
         await quoteFunctionality.launchURL()
     })
-    test("my quote page functionalities",async({page})=>{
+    test("TC-002 my quote page functionalities",async({page})=>{
         await quoteFunctionality.pagination()
         await quoteFunctionality.delete()
         await quoteFunctionality.searchByNumber()
