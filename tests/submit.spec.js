@@ -1,6 +1,6 @@
 const { test } = require('@playwright/test')
 // const indexPage  =require('../index.page')
-const {SubmitFlow} =require('../pageObject/quoteCreation.page')
+const {SubmitFlow} =require('../page object/quoteCreation.page')
 require('dotenv').config
 let submitFlowPage;
 test.beforeEach("launch URL", async({page})=>{
