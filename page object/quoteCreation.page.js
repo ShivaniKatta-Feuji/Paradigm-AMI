@@ -1,6 +1,7 @@
 
 const { test, expect } = require('@playwright/test');
 const data = require("../Data/datafiles.json")
+const logIn=require("../data/loginfiles.json")
 require('dotenv').config();
 exports.SubmitFlow = class SubmitFlow {
   constructor(page) {
@@ -56,7 +57,7 @@ exports.SubmitFlow = class SubmitFlow {
 
   }
   async navigate() {
-    await this.page.goto('https://am-webcp-test.myparadigmcloud.com/login')
+    await this.page.goto(logIn.login)
     await this.email.fill(process.env.admin_username);
     await this.page.waitForTimeout(2000)
     await expect(this.email).toHaveValue(process.env.admin_username)
@@ -70,46 +71,36 @@ exports.SubmitFlow = class SubmitFlow {
    await this.btnHide.click()
    await this.btnSubmit.click()
    const currentURl=this.page.url()
-   await expect(currentURl).not.toContain('login')
+   await expect(currentURl).not.toContain(logIn.login)
    await expect(this.btnMyQuotes).toBeVisible()
    await this.btnMyQuotes.click()
    await this.page.waitForTimeout(7000)
    const currentURl1=this.page.url()
-   console.log(currentURl1,"new")
-  //  await expect(currentURl).toContau
-   await expect(this.page.url()).toContain('quotes')
-   
+   await expect(this.page.url()).toContain(logIn.quotes)   
    await expect(this.btnNewQuote).toBeVisible()
 
 }
 async quoteCreation(){
   await this.btnNewQuote.click()
-  await expect(this.page.url()).toContain('create')
+  await expect(this.page.url()).toContain(logIn.create)
   await this.quoteName.click()
   await this.quoteName.fill(process.env.quoteName)
   await this.projectName.fill(process.env.quoteName);
   await this.page.getByText(`Create "${process.env.quoteName}"`, { exact: true }).click();
    await this.btnSelectClient.click()
   await this.placeHolder.click()
-  console.log(data.clientName)
   await this.placeHolder.fill(data.clientName)
   await expect(this.containText).toBeVisible()
   await this.btnRadioSelect.click()
   await this.btnCreate.click()
-  // await this.page.pause()
 }
 async lineITems(){
-  // let locatorText=submitFlowPage.quoteId
+ 
   await this.page.waitForTimeout(2000)
   let quoteNumber=await this.quoteId.innerText()
   await this.page.waitForTimeout(500)
-  // await this.page.pause()
-  console.log(quoteNumber)
-  // await this.page.pause()
   quoteNumber = quoteNumber.replace('Quote', '').replace(/\s/g, '');
-  console.log(quoteNumber)
   await expect(this.msgSucess).toHaveText(`Quote ${quoteNumber} added`)
-  // await this.page.pause()
   await this.page.waitForTimeout(2000)
   await this.drpWindowWorldRep.click()
   await this.page.getByLabel('Window World Rep').selectOption('0');
@@ -144,7 +135,6 @@ async newLineItem(quoteNumber){
   await this.txtUserInitials.click()
   await this.txtUserInitials.fill(data.userInitials)
   await expect(this.txtJobCost).toBeVisible()
-  // await this.txtJobCost.fill(data.jobCost)
   await this.txtMeasureBy.click()
   await this.txtMeasureBy.fill(data.measureBy)
   await this.txtCashDeposit.click()
@@ -161,10 +151,6 @@ async newLineItem(quoteNumber){
   await this.btnFinalSave.click()
   await this.btnSubmitOrder.click()
   await expect(this.msgSucess).toContainText(`${quoteNumber} ordered`)
-
-
-
-
 }
 }
 
